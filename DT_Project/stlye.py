@@ -5,10 +5,10 @@ def set_styles():
     style = ttk.Style()
 
     # Set the style for the main window
-    style.configure('TFrame', background='#FFFFFF', padding=5)
+    style.configure('TFrame', background='#f0f0f0', padding=5)
     style.configure('TButton', background='#4CAF50', foreground='#FFFFFF', padding=(10, 5))
-    style.configure('TLabel', background='#FFFFFF', font=('Helvetica', 12), padding=(0, 5))
-    style.configure('Header.TLabel', font=('Helvetica', 16, 'bold'))
+    style.configure('TLabel', background='#f0f0f0', font=('Helvetica', 12), padding=(0, 5))
+    style.configure('Header.TLabel', font=('Helvetica', 16, 'bold'), background = '#333', foreground = '#FFFFFF')
 
 
 
