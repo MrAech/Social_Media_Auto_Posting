@@ -1,29 +1,16 @@
-import twitter
-import os
-import schedule
-import time
+import tweepy
 
-def post_to_twitter():
-    # Authenticate with Twitter API
-    api = twitter.Api(consumer_key='tweet_consumer_key',
-                      consumer_secret='tweet_consumer_secret',
-                      access_token_key='tweet_access_token',
-                      access_token_secret='tweet_access_token_secret')
-
-    # Upload media and create tweet
-    with open('image', 'rb') as file:
-        media = api.UploadMediaSimple(file)
+def post_to_twitter(tweet_consumer_key, tweet_consumer_secret, tweet_access_token, tweet_access_token_secret, image_path, caption):
+    try:
+        auth = tweepy.OAuthHandler(tweet_consumer_key, tweet_consumer_secret, tweet_access_token, tweet_access_token_secret)
+        auth.set_access_token(tweet_access_token, tweet_access_token_secret)
+        api = tweepy.API(auth)
         
-    tweet = 'Caption'
-    status = api.PostUpdate(status=tweet, media=[media.media_id])
+        media = api.media_upload(image_path, chunked=True)
+        media_ids = [media]
 
-    # Delete media file after posting (optional)
-    os.remove('image')
+        api.simple_upload(media_ids)
 
-# Schedule the tweet
-schedule.every().day.at("12:00").do(post_to_twitter)
-
-# Run the scheduler
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+        print("Posted to Twitter successfully!")
+    except Exception as e:
+        print(f"Twitter post failed: {e}")
