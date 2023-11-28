@@ -46,8 +46,9 @@ def get_image():
 
 def send():
     message = message_entry.get()
-    channel_id = channel_entry.get()
+    
     if discord_var.get():
+        channel_id = simpledialog.askstring("Discord Channel ID", "Enter Discord Channel ID:")
         discord_token = simpledialog.askstring("Discord Token", "Enter Discord Bot Token:")
         send_to_discord(message, selected_image_path, discord_token, channel_id)
     if twitter_var.get():
@@ -64,6 +65,8 @@ def send():
 # Create GUI
 root = tk.Tk()
 root.title("Social Media Sender")
+heading_label = tk.Label(root, text="Social Media Sender", font=("Arial", 20, "bold"))
+heading_label.grid(row=0, column=0, columnspan=2, pady=20)
 
 selected_image_path = ""
 
@@ -73,46 +76,40 @@ facebook_var = tk.BooleanVar()
 
 # Label for Message
 message_label = tk.Label(root, text="Message:")
-message_label.grid(row=0, column=0, sticky="w")
-
-# Entry for Message
+message_label.grid(row=1, column=0, sticky="w")
 message_entry = tk.Entry(root)
-message_entry.grid(row=0, column=1)
+message_entry.grid(row=1, column=1)
 
-# Label for Discord Channel ID
-channel_label = tk.Label(root, text="Discord Channel ID:")
-channel_label.grid(row=1, column=0, sticky="w")
-
-# Entry for Discord Channel ID
-channel_entry = tk.Entry(root)
-channel_entry.grid(row=1, column=1)
 
 # Select Image Button
 select_image_button = tk.Button(root, text="Select Image", command=get_image)
-select_image_button.grid(row=2, column=0, columnspan=2, pady=10)
+select_image_button.grid(row=3, column=0, columnspan=2, pady=10)
 
 # Image Display
 image_label = tk.Label(root)
-image_label.grid(row=3, column=0, columnspan=2)
+image_label.grid(row=4, column=0, columnspan=2)
 
 # Send to Label
 send_label = tk.Label(root, text="Send to:")
-send_label.grid(row=4, column=0, sticky="w")
+send_label.grid(row=5, column=0, sticky="w")
 
 # Checkboxes for platforms
 discord_check = tk.Checkbutton(root, text="Discord", variable=discord_var)
-discord_check.grid(row=4, column=1, sticky="w")
+discord_check.grid(row=6, column=1, sticky="w")
 twitter_check = tk.Checkbutton(root, text="Twitter", variable=twitter_var)
-twitter_check.grid(row=5, column=1, sticky="w")
+twitter_check.grid(row=7, column=1, sticky="w")
 facebook_check = tk.Checkbutton(root, text="Facebook", variable=facebook_var)
-facebook_check.grid(row=6, column=1, sticky="w")
+facebook_check.grid(row=8, column=1, sticky="w")
 
 # Send Button
 send_button = tk.Button(root, text="Send", command=send)
-send_button.grid(row=7, column=0, columnspan=2, pady=10)
+send_button.grid(row=9, column=0, columnspan=2, pady=10)
 
 # Status Label
 status_label = tk.Label(root, text="")
-status_label.grid(row=8, column=0, columnspan=2)
+status_label.grid(row=10, column=0, columnspan=2)
+
+
+
 
 root.mainloop()
