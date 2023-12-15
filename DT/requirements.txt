@@ -1,0 +1,4 @@
+discord.py==1.7.3
+Pillow==8.4.0
+tweepy==4.1.0
+facebook-sdk==10.0.0
