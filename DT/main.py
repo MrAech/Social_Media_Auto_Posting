@@ -110,6 +110,4 @@ status_label = tk.Label(root, text="")
 status_label.grid(row=10, column=0, columnspan=2)
 
 
-
-
 root.mainloop()
